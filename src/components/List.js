@@ -1,6 +1,8 @@
 import React,{ Component } from "react";
+import { getVideos } from '../api';
 import Message from "./Message";
 import Header from "./Header";
+import Item from './Item';
 
 class List extends Component{
     constructor(props){
@@ -12,6 +14,16 @@ class List extends Component{
         };
     }
 
+    async componentDidMount() {
+        this.setState({ isLoading: true });
+        try{
+            const videos = await getVideos();
+            this.setState({ videos , isLoading: false });
+          } catch(error){
+            this.setState({ error, isLoading: false });
+          }
+          return true;
+    }
     render(){
         const { videos,  isLoading, error } = this.state;
         if(isLoading){
@@ -26,12 +38,16 @@ class List extends Component{
         return(
             <React.Fragment>
                 <Header onClickAdd={this.handleAdd}/>
-                {
+                <div>
+                <div>
+                  {
                 videos && videos.map((video,i) => {
-                  //return (<Item key={i} data={video}/>)
-                  //return (<Item key={i} data={video}/>)
+                  return (<Item key={i} data={video}/>)
                 })
-                }
+                  }
+                </div>  
+                </div>
+               
             </React.Fragment>
         )
     }
