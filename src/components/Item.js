@@ -1,9 +1,9 @@
 import React from "react";
 
 const Item = ({ data }) => (
-	<div>
-		<img src={data.thumbnail} alt={data.title}/>
-		<div>{data.title}</div>
+	<div className="grid-item">
+		<img className="preview-image" src={data.thumbnail} alt={data.title}/>
+		<div className="preview-title">{data.title}</div>
 	</div>
 )
 export default Item;

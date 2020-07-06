@@ -38,13 +38,11 @@ class List extends Component{
         return(
             <React.Fragment>
                 <Header onClickAdd={this.handleAdd}/>
-                <div>
-                <div>
-                  {
-                videos && videos.map((video,i) => {
-                  return (<Item key={i} data={video}/>)
-                })
-                  }
+                <div className="container">
+                <div className="grid-container"> 
+                  {videos && videos.map((video,i) => {
+                    return (<Item key={i} data={video}/>)
+                    })}
                 </div>  
                 </div>
                
