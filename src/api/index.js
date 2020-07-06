@@ -43,6 +43,7 @@ const FAKE_DATA = [
 		thumbnail: 'https://img.youtube.com/vi/lttZCIin4HM/maxresdefault.jpg',
 	}
 ]; 
+const EXTERNAL_DATA = "https://rickandmortyapi.com/api/character/"
 
 export const addVideo = (newVideo) => new Promise((resolve, reject) => {	
 	setTimeout(() => { 
@@ -52,10 +53,26 @@ export const addVideo = (newVideo) => new Promise((resolve, reject) => {
 	},FAKE_DELAY);
 });
 
+const getThumbnail = async () =>{
+    try {
+        const resp = await fetch(EXTERNAL_DATA);
+        return resp.json();
+    } catch (error) {
+        throw error;
+    }
+}
+
 export const getVideos = () => new Promise((resolve, reject) => {	
-	setTimeout(() => { 
-		return resolve(FAKE_DATA);
-	},FAKE_DELAY);
+    getThumbnail()
+    .then(data =>{
+        const characters = data.results;
+        console.log(characters)
+        FAKE_DATA.forEach((element, i) =>{
+            element.thumbnail = characters[i+4].image;
+        })
+        return resolve(FAKE_DATA);
+    })
+	
 });
 
 const getDescription = async () => {
