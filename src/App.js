@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import List from './components/List'
+import Root from './components/Root';
 
 function App() {
   return (
     <div className="App">
-      <List/>
+      <Root/>
     </div>
   );
 }
